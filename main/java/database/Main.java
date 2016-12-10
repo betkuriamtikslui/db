@@ -9,6 +9,10 @@ public class Main {
 	static ExecutorService pool;
 
 	public static void main(String[] args) throws SQLException {
+		Database.url = args[1];
+		Database.url = args[2];
+		Database.url = args[3];
+
 		int length = 10;
 		ConcurrentLinkedQueue<String> second1 = new ConcurrentLinkedQueue<String>();
 		ConcurrentLinkedQueue<String> second2 = new ConcurrentLinkedQueue<String>();

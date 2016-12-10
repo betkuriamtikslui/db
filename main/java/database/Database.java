@@ -12,9 +12,9 @@ public class Database implements Runnable {
 	ResultSet rs = null;
 	private final String  basic = "INSERT INTO stuff (id, parent_id, link_id, name, author, body, subreddit_id,subreddit,score, created_utc )VALUES ";
 
-	static String url = "jdbc:mysql://localhost:3306/my_db?autoReconnect=true&useSSL=false";
-	static String user = "root";
-	static String password = "123456789";
+	static String url = "";
+	static String user = "";
+	static String password = "";
 	public ConcurrentLinkedQueue<String> fetchFrom;
 
 
@@ -51,15 +51,7 @@ public class Database implements Runnable {
 				
 			}
 			try {
-//				for(int i = 0; i< 5; i++){
-//					System.out.println("************************************");
-//				}
-//				System.out.println(query);
-//				for(int i = 0; i< 5; i++){
-//					System.out.println("************************************");
-//				}
-			//	System.out.println(query);
-			//	System.out.println(query);
+
 				st.executeUpdate(query);
 				
 			} catch (SQLException e) {
