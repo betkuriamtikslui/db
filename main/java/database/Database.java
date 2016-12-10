@@ -3,51 +3,69 @@ package database;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Database implements Runnable {
 
 	java.sql.Connection con = null;
 	java.sql.Statement st = null;
 	ResultSet rs = null;
+	private final String  basic = "INSERT INTO stuff (id, parent_id, link_id, name, author, body, subreddit_id,subreddit,score, created_utc )VALUES ";
 
 	static String url = "jdbc:mysql://localhost:3306/my_db?autoReconnect=true&useSSL=false";
 	static String user = "root";
 	static String password = "123456789";
 	public ConcurrentLinkedQueue<String> fetchFrom;
 
-	Lock l;
 
 	public Database() throws SQLException {
 		con = DriverManager.getConnection(url, user, password);
 		st = con.createStatement();
 		rs = st.executeQuery("SELECT VERSION()");
-		l = new ReentrantLock();
 	}
 
 	public void run() {
 		boolean go = true;
+		int end = 15;
+		String query = "";
+		String tmp;
 		while (go) {
-			try {
-				String s = fetchFrom.poll();
-				if (s != null) {
-					st.executeUpdate(s);
-					//System.out.println(s);
+			// String basic = "INSERT INTO stuff (id, parent_id, link_id, name,
+			// author, body, subreddit_id,subreddit,score, created_utc )VALUES
+		
+			query = basic;
+			for (int i = 0; i < end; i++) {
+				tmp = fetchFrom.poll();
+				
+				if (tmp == null) {
+					i--;
 				} else {
-					if(!Checker.go){
-						break;
+					//tmp = tmp.replaceAll("\'", "\\\'");
+					query += tmp;
+					if (i != end - 1) {
+						query += ",";
+					} else {
+						query += ";";
 					}
 				}
-			} catch (Exception e) {
 				
+			}
+			try {
+//				for(int i = 0; i< 5; i++){
+//					System.out.println("************************************");
+//				}
+//				System.out.println(query);
+//				for(int i = 0; i< 5; i++){
+//					System.out.println("************************************");
+//				}
+			//	System.out.println(query);
+			//	System.out.println(query);
+				st.executeUpdate(query);
+				
+			} catch (SQLException e) {
 				continue;
 			}
 		}
 	}
 
-	
 }
