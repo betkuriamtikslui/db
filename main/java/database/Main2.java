@@ -28,16 +28,12 @@ public class Main2 {
 		ConcurrentLinkedQueue<String> postQueue = new ConcurrentLinkedQueue<String>();
 		ConcurrentLinkedQueue<String> subredditQueue = new ConcurrentLinkedQueue<String>();
 		pool.execute(fr);
-		pool.execute(new DoubleChecker(list,postQueue, subredditQueue));
-		pool.execute(new DoubleChecker(list,postQueue, subredditQueue));
-		pool.execute(new DoubleChecker(list,postQueue, subredditQueue));
+		pool.execute(new DoubleChecker(list,postQueue, subredditQueue));	
+		pool.execute(new DoubleChecker(list,postQueue, subredditQueue));	
 
-
-		Database.initialize();
 		pool.execute(new Database(postBase, postQueue));
 		pool.execute(new Database(subredditBase, subredditQueue));
-		pool.execute(new Database(postBase, postQueue));
-		pool.execute(new Database(subredditBase, subredditQueue));
+
 
 		while(!fr.empty){
 			try {

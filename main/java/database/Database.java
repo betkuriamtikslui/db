@@ -59,7 +59,7 @@ public class Database implements Runnable {
 
 	public void run() {
 		boolean go = true;
-		int end = 1;
+		int end = 5;
 		String query = "";
 		String tmp;
 		while (go) {

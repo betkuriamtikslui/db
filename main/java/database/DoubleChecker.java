@@ -24,7 +24,7 @@ public class DoubleChecker implements Runnable {
 	}
 
 	public void run() {
-		int count = 10;
+		int count = 15;
 		while (go) {
 			String line = list.fetch();
 			String subredditFull = "";
