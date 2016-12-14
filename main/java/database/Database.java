@@ -80,7 +80,6 @@ public class Database implements Runnable {
 				}
 			}
 			try {
-				System.out.println(query);
 				st.executeUpdate(query);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
