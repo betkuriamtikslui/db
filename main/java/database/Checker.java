@@ -1,8 +1,6 @@
 package database;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.TimeUnit;
-
 import javax.script.*;
 
 public class Checker implements Runnable {
