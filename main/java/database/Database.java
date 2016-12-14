@@ -44,7 +44,7 @@ public class Database implements Runnable {
 		String my_db = "USE my_db;";
 		st1.execute(my_db);
 		String createSubreddits = "CREATE TABLE subreddits (subreddit_id varchar(255),subreddit varchar(255));";
-		String createPosts = "CREATE TABLE posts (id varchar(20),parent_id varchar(15),link_id varchar(15),name varchar(255),author varchar(255),body text(65535 ),score int,created_utc int);";
+		String createPosts = "CREATE TABLE posts (id varchar(20),parent_id varchar(15),link_id varchar(15),name varchar(255),author varchar(255),body text(65535 )CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,score int,created_utc int);";
 		st1.executeUpdate(dropSubreddits);
 		st1.executeUpdate(dropPosts);
 		st1.execute(createPosts);

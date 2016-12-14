@@ -1,5 +1,6 @@
 package database;
 
+import java.nio.charset.Charset;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.script.ScriptEngine;
@@ -42,6 +43,8 @@ public class DoubleChecker implements Runnable {
 						String name = (String) engine.eval("x.name");
 						String author = (String) engine.eval("x.author");
 						String body = (String) engine.eval("x.body");
+						String s =Charset.forName("UTF-8").encode(body).toString();
+						body = s;
 						body = body.replaceAll("'", "||");
 						body = body.replace("\\", "/");
 						String subreddit_id = (String) engine.eval("x.subreddit_id");
