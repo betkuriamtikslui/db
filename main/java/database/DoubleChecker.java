@@ -33,7 +33,7 @@ public class DoubleChecker implements Runnable {
 			String post;
 			for (int i = 0; i < count; i++) {
 				if (line != null) {
-					
+
 					try {
 						engine.eval("var x  = " + line);
 						String id = (String) engine.eval("x.id");
@@ -53,20 +53,24 @@ public class DoubleChecker implements Runnable {
 						if (i != count - 1) {
 							sub += ",\n";
 						}
-						post =  "('" + id + "', '" + parent_id + "', '" + link_id + "', '" + name + "', '" + author
-								+ "', '" + body + "', '" + Integer.toString(score) + "', '" + Integer.toString(created_utc) + "')";
+						post = "('" + id + "', '" + parent_id + "', '" + link_id + "', '" + name + "', '" + author
+								+ "', '" + body + "', '" + Integer.toString(score) + "', '"
+								+ Integer.toString(created_utc) + "')";
 						if (i != count - 1) {
 							post += ",\n";
 						}
-						
-//						String s = "('" + id + "', '" + parent_id + "', '" + link_id + "', '" + name + "', '" + author
-//								+ "', '" + body + "', '" + subreddit_id + "', '" + subreddit + "', '"
-//								+ Integer.toString(score) + "', '" + Integer.toString(created_utc) + "')";
-//						if (i != count - 1) {
-//							s += ",\n";
-//						}
+
+						// String s = "('" + id + "', '" + parent_id + "', '" +
+						// link_id + "', '" + name + "', '" + author
+						// + "', '" + body + "', '" + subreddit_id + "', '" +
+						// subreddit + "', '"
+						// + Integer.toString(score) + "', '" +
+						// Integer.toString(created_utc) + "')";
+						// if (i != count - 1) {
+						// s += ",\n";
+						// }
 						postFull += post;
-						subredditFull+= sub;
+						subredditFull += sub;
 					} catch (ScriptException e) {
 						continue;
 					}
@@ -78,14 +82,16 @@ public class DoubleChecker implements Runnable {
 					}
 				}
 			}
-			
+
 			subredditQueue.add(subredditFull);
 			postQueue.add(postFull);
 
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				continue;
+			if (subredditQueue.size() > 150 || postQueue.size() > 150) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					continue;
+				}
 			}
 
 		}

@@ -31,7 +31,12 @@ public class Main2 {
 		pool.execute(new DoubleChecker(list,postQueue, subredditQueue));	
 		pool.execute(new DoubleChecker(list,postQueue, subredditQueue));	
 
+		
 		pool.execute(new Database(postBase, postQueue));
+		pool.execute(new Database(postBase, postQueue));
+		pool.execute(new Database(postBase, postQueue));
+
+		pool.execute(new Database(subredditBase, subredditQueue));
 		pool.execute(new Database(subredditBase, subredditQueue));
 
 
