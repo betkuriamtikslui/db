@@ -32,57 +32,50 @@ public class DoubleChecker implements Runnable {
 			String postFull = "";
 			String sub;
 			String post;
-			for (int i = 0; i < count; i++) {
-				if (line != null) {
+			if (line != null) {
 
-					try {
-						engine.eval("var x  = " + line);
-						String id = (String) engine.eval("x.id");
-						String parent_id = (String) engine.eval("x.parent_id");
-						String link_id = (String) engine.eval("x.link_id");
-						String name = (String) engine.eval("x.name");
-						String author = (String) engine.eval("x.author");
-						String body = (String) engine.eval("x.body");
-						String s =Charset.forName("UTF-8").encode(body).toString();
-						body = s;
-						body = body.replaceAll("'", "||");
-						body = body.replace("\\", "/");
-						String subreddit_id = (String) engine.eval("x.subreddit_id");
-						String subreddit = (String) engine.eval("x.subreddit");
-						int score = (Integer) engine.eval("x.score");
-						int created_utc = Integer.parseInt((String) engine.eval("x.created_utc"));
+				try {
+					engine.eval("var x  = " + line);
+					String id = (String) engine.eval("x.id");
+					String parent_id = (String) engine.eval("x.parent_id");
+					String link_id = (String) engine.eval("x.link_id");
+					String name = (String) engine.eval("x.name");
+					String author = (String) engine.eval("x.author");
+					String body = (String) engine.eval("x.body");
+					String s = Charset.forName("UTF-8").encode(body).toString();
+					body = s;
+					body = body.replaceAll("'", "||");
+					body = body.replace("\\", "/");
+					String subreddit_id = (String) engine.eval("x.subreddit_id");
+					String subreddit = (String) engine.eval("x.subreddit");
+					int score = (Integer) engine.eval("x.score");
+					int created_utc = Integer.parseInt((String) engine.eval("x.created_utc"));
 
-						sub = "('" + subreddit_id + "', '" + subreddit + "')";
-						if (i != count - 1) {
-							sub += ",\n";
-						}
-						post = "('" + id + "', '" + parent_id + "', '" + link_id + "', '" + name + "', '" + author
-								+ "', '" + body + "', '" + Integer.toString(score) + "', '"
-								+ Integer.toString(created_utc) + "')";
-						if (i != count - 1) {
-							post += ",\n";
-						}
+					sub = "('" + subreddit_id + "', '" + subreddit + "')";
+					
+					post = "('" + id + "', '" + parent_id + "', '" + link_id + "', '" + name + "', '" + author + "', '"
+							+ body + "', '" + subreddit_id + "', '" + Integer.toString(score) + "', '"
+							+ Integer.toString(created_utc) + "')";
+					
+					// String s = "('" + id + "', '" + parent_id + "', '" +
+					// link_id + "', '" + name + "', '" + author
+					// + "', '" + body + "', '" + subreddit_id + "', '" +
+					// subreddit + "', '"
+					// + Integer.toString(score) + "', '" +
+					// Integer.toString(created_utc) + "')";
+					// if (i != count - 1) {
+					// s += ",\n";
+					// }
+					postFull += post;
+					subredditFull += sub;
+				} catch (ScriptException e) {
+					continue;
+				}
 
-						// String s = "('" + id + "', '" + parent_id + "', '" +
-						// link_id + "', '" + name + "', '" + author
-						// + "', '" + body + "', '" + subreddit_id + "', '" +
-						// subreddit + "', '"
-						// + Integer.toString(score) + "', '" +
-						// Integer.toString(created_utc) + "')";
-						// if (i != count - 1) {
-						// s += ",\n";
-						// }
-						postFull += post;
-						subredditFull += sub;
-					} catch (ScriptException e) {
-						continue;
-					}
-
-					// System.out.println(full);
-				} else {
-					if (FileReader.empty) {
-						this.go = false;
-					}
+				// System.out.println(full);
+			} else {
+				if (FileReader.empty) {
+					this.go = false;
 				}
 			}
 

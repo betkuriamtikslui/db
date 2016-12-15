@@ -1,14 +1,14 @@
-//package database;
-//
-//import java.sql.SQLException;
-//import java.util.concurrent.ConcurrentLinkedQueue;
-//import java.util.concurrent.ExecutorService;
-//import java.util.concurrent.Executors;
-//
-//public class Main {
-//	static ExecutorService pool;
-//
-//	public static void main(String[] args) throws SQLException {
+package database;
+
+import java.sql.SQLException;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Main {
+	static ExecutorService pool;
+
+	public static void main(String[] args) throws SQLException {
 //		Database.url = args[1];
 //		Database.user = args[2];
 //		Database.password = args[3];
@@ -33,7 +33,7 @@
 //					c.destination = second1;
 //					break;
 //
-//					pool.execute(c);
+//			//		pool.execute(c);
 //					Database db = new Database(
 //							"INSERT INTO stuff (id, parent_id, link_id, name, author, body, subreddit_id,subreddit,score, created_utc )VALUES");
 //
@@ -57,5 +57,5 @@
 //				// }
 //			}
 //		}
-//	}
-//}
+	}
+}
