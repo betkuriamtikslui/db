@@ -17,9 +17,9 @@ public class Main3 {
 
 		pool = Executors.newFixedThreadPool(500);
 		CircularList<String> list = new CircularList<String>();
-		FileReader fr = new FileReader(list, "e:\\database\\dbs\\2.json");
+		FileReader fr = new FileReader(list, args[0]);
 		pool.execute(fr);
-		File output = new File("E:\\12.json");
+		File output = new File(args[1]);
 		BufferedWriter bw = new BufferedWriter(new FileWriter(output, false));
 		bw.write("[");
 		bw.flush();
@@ -33,7 +33,7 @@ public class Main3 {
 			} catch (InterruptedException e) {
 				continue;
 			}
-		}		
+		}
 		System.out.println("finished");
 	}
 }
