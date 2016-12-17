@@ -25,10 +25,10 @@ public class Main3 {
 		bw.flush();
 		pool.execute(new Writer(output, list));
 
-		while (!fr.empty && !Writer.go) {
+		while (Writer.go) {
 			try {
 				System.out.println(System.currentTimeMillis());
-				System.out.println(" " + list.size());
+				System.out.println(" " + list.size()+ " "+ Writer.count+" ");
 				Thread.sleep(60000);
 			} catch (InterruptedException e) {
 				continue;

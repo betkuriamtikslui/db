@@ -30,8 +30,8 @@ public class FileReader implements Runnable {
 //					list3.add(line);
 //				} else {
 					list.add(line);
-					if(list.size() > 100){
-						Thread.sleep(400);
+					if(list.size() > 500){
+						Thread.sleep(100);
 					}
 //				}
 //	
